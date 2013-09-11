@@ -1,25 +1,26 @@
 html
 	meta charset="utf-8"
+	
 	head
     meta charset="utf-8"
-    title Board Shine
+    title Board Trails
     meta name="viewport" content="width=device-width, initial-scale=1.0"
-    link href="bootstrap/css/bootstrap.css" rel="stylesheet"
-    link href="css/flat-ui.css" rel="stylesheet"    
     link rel="shortcut icon" href="images/favicon.ico"
-
+    
+    link href="bootstrap/css/bootstrap.css" rel="stylesheet"    
     link href="css/overrides.css" rel="stylesheet"    
+		link href="css/font-awesome.min.css" rel="stylesheet"    
+    link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'
 
 	body
-		.container-fluid    
-			.navbar
-				.navbar-inner
-				  .container
-				  	button.btn.btn-navbar type="button"	data-toggle="collapse" data-target="#nav-collapse-01"
-				  	a.navbar-brand href="/" BoardShine
-
-		.container
-			== yield
+		.navbar.palette-nephritis
+		  .container
+		  	.navbar-header
+			  	button.navbar-toggle type="button"	data-toggle="collapse" data-target=".navbar-collapse"
+			  		span.icon-reorder
+			  	a.navbar-brand href="/" Board Trails 
+  			.navbar-collapse.collapse
+		== yield
 
     <!-- Load JS here for greater good =============================-->
     script src="js/jquery-1.8.3.min.js"
@@ -28,9 +29,6 @@ html
     script src="js/bootstrap.min.js"
     script src="js/bootstrap-select.js"
     script src="js/bootstrap-switch.js"
-    script src="js/flatui-checkbox.js"
-    script src="js/flatui-radio.js"
     script src="js/jquery.tagsinput.js"
     script src="js/jquery.placeholder.js"
-    script src="js/jquery.stacktable.js"
 

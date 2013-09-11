@@ -1,4 +1,4 @@
 require 'bundler'
 Bundler.require
-require './boardshine'
-run BoardShine
+require './boardtrails'
+run BoardTrails
