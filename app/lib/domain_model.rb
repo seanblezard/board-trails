@@ -2,7 +2,7 @@ module DomainModel
 	attr_accessor :id, :created_at, :updated_at, :violations
 
 	def validate
-		#Do nothing by default
+		clear_violations 
 	end
 
 	def clear_violations
