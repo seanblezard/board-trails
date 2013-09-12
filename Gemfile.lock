@@ -87,6 +87,7 @@ GEM
       atomic
     tilt (1.4.1)
     tzinfo (0.3.37)
+    uuidtools (2.1.4)
 
 PLATFORMS
   ruby
@@ -105,3 +106,4 @@ DEPENDENCIES
   sinatra (~> 1.4.0)
   sinatra-contrib!
   slim
+  uuidtools (~> 2.1.3)

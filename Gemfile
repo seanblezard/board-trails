@@ -6,6 +6,7 @@ gem 'sinatra', '~> 1.4.0'
 gem 'rabl'
 gem 'slim'
 gem 'chronic'
+gem "uuidtools", "~> 2.1.3"
 
 group :development, :test do
   gem "pry"
