@@ -3,10 +3,6 @@ class Board
 
 	attr_accessor :name
 
-	def valid?
-		self.violations.size == 0		
-	end
-
 	def validate
 		clear_violations
 	  if self.name.nil? || self.name.length == 0

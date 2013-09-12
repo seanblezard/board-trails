@@ -10,7 +10,7 @@ module DomainModel
 	end
 
 	def valid?
-		true
+		@violations.size == 0		
 	end
 
 	def initialize(h={})
