@@ -1,7 +1,10 @@
+#
+# Responsible for creating and persisting new boards - issuing a callback to a reporter
+#
+
 class BoardCreator < Struct.new(:name, :repository)
   def perform(reporter)
-  	board = repository.new ({name: name})
-  	board = repository.create (board)
+  	board = repository.create (Board.new({name:name}))
 
     if (board.valid?)
       reporter.board_created(board) if reporter

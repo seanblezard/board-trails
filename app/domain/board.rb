@@ -1,3 +1,7 @@
+#
+# A model representation of a physical whiteboard.
+#
+
 class Board 
 	include DomainModel
 
@@ -5,7 +9,8 @@ class Board
 
 	def validate
 		super
-	  if self.name.nil? || self.name.length == 0
+		name = self.name
+	  if name.nil? || name.length == 0
 	  	@violations << DomainViolation.new({message: "You have to supply a name for this new board"})
 	  end
 	end
