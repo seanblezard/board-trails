@@ -40,6 +40,7 @@ class Board
 	#
 	# Validation rules for this model
 	#
+	
 	class RequiresName
 		def initialize(board)
 			message = "You have to supply a name for this new board"
