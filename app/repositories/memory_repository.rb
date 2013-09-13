@@ -22,6 +22,7 @@ module MemoryRepository
 			domain.validate
 			
 			if domain.valid?
+				domain.created_at = Time.now.utc
 				domain.id=MemoryRepository.issue_new_id
 				MemoryRepository.memory[domain.id] = domain
 			end
@@ -35,6 +36,7 @@ module MemoryRepository
 			domain.validate			
 			
 			if domain.valid?
+				domain.updated_at = Time.now.utc
 				MemoryRepository.memory[domain.id] = domain
 			end
 			

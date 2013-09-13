@@ -19,7 +19,15 @@ describe MemoryRepository do
       board.id.should_not eq nil
     end
 
-    it "should precent saving a board with no name and not assign it a UUID" do
+    it "should timestamp the the new board's created_at" do
+      board_name = "Brand new board"
+      repo = MemoryRepository::BoardRepository.new
+      board = repo.new({name: board_name})
+      board = repo.create(board)
+      board.created_at.should_not eq nil
+    end
+
+    it "should prevent saving a board with no name and not assign it a UUID" do
       board = Board.new
       board = MemoryRepository::BoardRepository.new.create(board)
       board.id.should eq nil
@@ -30,6 +38,11 @@ describe MemoryRepository do
       @existing_board.name = new_name      
       @existing_board = MemoryRepository::BoardRepository.new.update(@existing_board)      
       @existing_board.name.should eq new_name
+    end
+
+    it "should timestamp the updated_at when saving a board" do
+      @existing_board = MemoryRepository::BoardRepository.new.update(@existing_board)      
+      @existing_board.updated_at.should_not eq nil
     end
 
     it "should return the one existing board" do

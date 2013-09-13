@@ -24,6 +24,25 @@ describe Board do
       board.valid?.should eq true
     end
   end
+
+  describe "adding lanes to a board" do
+    it "should add a new lane called 'Backlog'" do 
+      board = Board.new({name: "Project Board"})
+      board.lanes << Board::Lane.new("Backlog")
+
+      board.lanes.size.should eq 1
+    end
+
+    it "should create a board violation when I add a lane with no name" do 
+      board = Board.new({name: "Project Board"})
+      board.lanes << Board::Lane.new()
+
+      board.validate
+      board.violations.size.should eq 1
+    end
+
+  end
+
      
   after(:each) do
   end
