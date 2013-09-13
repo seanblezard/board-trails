@@ -53,8 +53,16 @@ class BoardTrails < Sinatra::Base
 	end
 
 	# Take me to the screen to create a new board
+	get '/boards/new' do
+		@board = Repository.for(:board).new
+		slim :"boards/new", :layout=>true
+	end
 
 	# Create the new board and show me the details for it
+	put '/boards' do
+		@board = Repository.for(:board).new(params)
+		slim :"boards/new", :layout=>true
+	end
 
 	# Take me to the edit screen for an existing board
 

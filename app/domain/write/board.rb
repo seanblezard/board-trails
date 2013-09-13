@@ -28,12 +28,7 @@ class Board
 	# Identified by being uniquely named
  	#
 
-	class Lane
-		attr_accessor :name
-
-		def initialize(name=nil)
-			@name = name
-		end
+	class Lane < Struct.new(:name)
 	end	
 
 
