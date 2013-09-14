@@ -7,4 +7,5 @@ class CardData
 	attr_accessor :card  #Card::Snapshot
 	attr_accessor :board #Board::Snapshot
 	attr_accessor :lane  #String
+	attr_accessor :date  #Date
 end
