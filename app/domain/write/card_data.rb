@@ -4,5 +4,7 @@
 class CardData 
 	include DomainModel
 
-	attr_accessor :card #CardSnapshot
+	attr_accessor :card  #Card::Snapshot
+	attr_accessor :board #Board::Snapshot
+	attr_accessor :lane  #String
 end

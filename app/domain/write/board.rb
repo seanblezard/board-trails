@@ -5,11 +5,12 @@
 class Board 
 	include DomainModel
 
-	attr_accessor :name, :lanes
+	attr_accessor :name 	#String
+	attr_accessor :lanes  #Array of Board::Lane objects
 
 	def initialize(attributes={})
 		super(attributes)
-		@lanes = [] #Collection of Board::Lane objects
+		@lanes = [] 
 	end	
 
 	def validate
@@ -59,5 +60,15 @@ class Board
 		  end
 		end
 	end
+
+	#
+	# Snapshot for exporting a reference
+	#
+	def snapshot
+		Snapshot.new(@id, @name)
+	end
+
+	class Snapshot < Struct.new(:board_id, :board_name)
+	end	
 
 end
