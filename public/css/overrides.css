@@ -1,5 +1,5 @@
 /* Set the default font family to Google 'droid sans'*/
-body, P, H1, H2, H3, H4{
+body, P, H1, H2, H3, H4, FORM{
   font-family: 'Droid Sans', sans-serif;
   font-weight: 400;
 }
@@ -40,9 +40,6 @@ button.navbar-toggle span.icon-reorder{
 .jumbotron H1{
 	font-size: 48px;
 }
-
-
-
 
 
 

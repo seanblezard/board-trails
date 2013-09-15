@@ -43,6 +43,10 @@ module MemoryRepository
 			domain
 		end		
 
+		def find_by_id id
+			@@memory[id]
+		end
+
 		def all()
 			MemoryRepository.all_by_class(self.domain_class)
 		end

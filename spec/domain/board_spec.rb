@@ -12,7 +12,7 @@ describe Board do
       board.valid?.should eq false    
     end
 
-    it "should create a 'name is required' type erorr message when we forget to supply a name" do
+    it "should create a 'name is required' type error message when we forget to supply a name" do
       board = Board.new()
       board.validate
       board.violations.size.should eq 1

@@ -55,30 +55,53 @@ class BoardTrails < Sinatra::Base
 		Repository.for(:board)
 	end 
 
+	# ######################
+	# Request helper methods
+	# ######################
 
+	#If we are doing full round-trips use layout, otherwise just return the fragment
+	def use_layout
+		request.env['X-PJAX'] != nil 
+	end
 
 	# #######################
 	# Advertised routes
 	# #######################
 
 	#
-  # First off, I want to see the boards I am already measuring and tracking
+  # Render the root index page
 	#
 	get '/' do
+		slim :index, :layout=>true, :locals => {js: 'index.js'}
+	end
+
+
+	#
+  # Show me the boards I can see/track
+	#
+	get '/boards' do
 		Controller::ShowMyBoards.new(board_repository).perform(self)
 	end
 
 	# Callback from controller
-	def retrieved_list_of_boards(boards)
-		slim :index, :layout=>true, :locals => {boards: boards}
+	def retrieved_list_of_boards(boards)		
+    slim :"boards", :layout => use_layout, :locals => {boards: boards}
 	end
 
+	#
+	# I want to start tracking this board - create it for me 
+	#
+	post '/boards' do
+		Controller::CreateBoard.new(board_repository).perform(self)
+	end
 
-	#
-	# I want to create a new board to start gathering data against a process
-	#
-	get '/boards/new' do
-		slim :"boards/new", :layout=>true, :locals => {board: board_repository.new_board}
+	#Callbacks from controller
+	def board_created_successfully(board)
+		redirect_to '/'
+	end
+
+	def problems_trying_to_create_board(board)
+		slim :index, :layout=>true, :locals => {new_board: board} 
 	end
 
 
