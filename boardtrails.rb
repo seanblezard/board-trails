@@ -7,17 +7,20 @@ require 'slim'
 
 
 class BoardTrails < Sinatra::Base
-	#
+	
+	# #######################
 	# Configure Slim
-	#
+	# #######################	
+
 	Slim::Engine.set_default_options :pretty => true
 	set :slim, :layout_engine => :slim
 	set :root, File.dirname(__FILE__)
 	set :views, Proc.new { File.join(root, "app/views") }
 
-	#
-	# Environment tests
-	#
+	# #######################
+	# Helper methods to test which environment we are running against
+	# #######################	
+
 	def development?
 		ENV['RACK_ENV']=="development"
 	end
@@ -30,39 +33,65 @@ class BoardTrails < Sinatra::Base
 		ENV['RACK_ENV']=="production"
 	end
 
-	#
+	# #######################
 	# Load classes
-	#
- 	require_relative 'app/init.rb'
+	# #######################
 
- 	#
+ 	require_relative 'app/init.rb' #Chain of init.rb's into sub-directories
+
+ 	# #######################
  	# Configure repositories
- 	#
+ 	# #######################
+	
 	configure :test, :development do
 		Repository.register(:board, MemoryRepository::BoardRepository.new)
 	end
 
-	#
-	# Routes
-	#
+	# #######################
+	# Repo helper methods
+	# #######################
+	
+	def board_repository
+		Repository.for(:board)
+	end 
 
-  # Take me to the list of boards I can choose from (default page just now)
+
+
+
+	# #######################
+	# Advertised routes
+	# #######################
+
+	#
+  # First off, I want to see the boards I am already measuring and tracking
+	#
 	get '/' do
-		@boards = Repository.for(:board).all
+		Controller::ShowMyBoards.new(board_repository).perform(self)
+	end
+
+	# Callback from controller
+	def retrieved_list_of_boards(boards)
+		@boards=boards
 		slim :index, :layout=>true
 	end
 
-	# Take me to the screen to create a new board
+
+	#
+	# I want to create a new board to start gathering data against a process
+	#
 	get '/boards/new' do
-		@board = Repository.for(:board).new
+		@board = board_repository.new
 		slim :"boards/new", :layout=>true
 	end
 
-	# Create the new board and show me the details for it
-	put '/boards' do
-		@board = Repository.for(:board).new(params)
-		slim :"boards/new", :layout=>true
-	end
+
+	#
+	# OK, I've entered all of the details for a new board, create it for me
+	#
+
+
+
+
 
 	# Take me to the edit screen for an existing board
 
@@ -76,5 +105,11 @@ class BoardTrails < Sinatra::Base
 
 	# Remove a lane from an existing board
 
-	# 
+	#
+
+
+
+
+
+
 end

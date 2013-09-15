@@ -46,10 +46,16 @@ module MemoryRepository
 		def all()
 			MemoryRepository.all_by_class(self.domain_class)
 		end
+
+		def delete_all()
+			MemoryRepository.clear_memory_by_class(self.domain_class)
+		end
 	end
 
 
-
+	#
+	# Methods available to all memory-based repo variations
+	#
 
 	def self.issue_new_id
 		UUIDTools::UUID.random_create.to_s 
@@ -62,6 +68,14 @@ module MemoryRepository
 			results << value if value.class == domain_class
 		end
 		results
+	end
+
+	def self.clear_memory_by_class(domain_class)
+		MemoryRepository.memory ||= {}
+		results = []
+		@@memory.each do |key, value|
+			 @@memory.delete(key) if value.class == domain_class
+		end			
 	end
 
 	def self.memory
