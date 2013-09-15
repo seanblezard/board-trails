@@ -9,7 +9,7 @@ describe MemoryRepository do
   describe "BoardRepository" do
     it "should create a new unsaved Board domain" do
       board_name = "Brand new board"
-      board = MemoryRepository::BoardRepository.new.new({name: board_name})
+      board = MemoryRepository::BoardRepository.new.new_board({name: board_name})
       board.name.should eq board_name
     end
 
@@ -22,7 +22,7 @@ describe MemoryRepository do
     it "should timestamp the the new board's created_at" do
       board_name = "Brand new board"
       repo = MemoryRepository::BoardRepository.new
-      board = repo.new({name: board_name})
+      board = repo.new_board({name: board_name})
       board = repo.create(board)
       board.created_at.should_not eq nil
     end
@@ -59,7 +59,7 @@ describe MemoryRepository do
   private
   def generate_board board_name=nil
     board_name = "#{board_name} #{Time.now.utc}"
-    MemoryRepository::BoardRepository.new.new({name: board_name})      
+    MemoryRepository::BoardRepository.new.new_board({name: board_name})      
   end  
 end
 

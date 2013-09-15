@@ -11,7 +11,7 @@ module MemoryRepository
 			Board
 		end
 
-		def new(attributes={})
+		def new_board(attributes={})
 			domain = domain_class.new(attributes)			
 			domain
 		end

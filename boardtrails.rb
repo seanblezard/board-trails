@@ -78,8 +78,7 @@ class BoardTrails < Sinatra::Base
 	# I want to create a new board to start gathering data against a process
 	#
 	get '/boards/new' do
-		@board = board_repository.new
-		slim :"boards/new", :layout=>true
+		slim :"boards/new", :layout=>true, :locals => {board: board_repository.new_board}
 	end
 
 

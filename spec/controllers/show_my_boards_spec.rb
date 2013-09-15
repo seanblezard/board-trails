@@ -4,7 +4,7 @@ describe "Show my board controller" do
   
   before(:all) do
     @repo = Repository.for(:board)
-    @repo.create( @repo.new({name:"Board 1"}) )
+    @repo.create( @repo.new_board({name:"Board 1"}) )
 
   end
 
