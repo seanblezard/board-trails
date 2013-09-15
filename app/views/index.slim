@@ -1,7 +1,8 @@
 .container
-  .jumbotron.palette-clouds
-  	H1 
-  		A href="/boards/1"
-  			'CRB HTML Project Board
-  	P
-  		'Sean Blezard / Oli Thomas
+  A.btn.btn-primary.btn-huge href="/boards/new"
+    'Start tracking a new board	
+	- for board in boards do
+	  .jumbotron.palette-clouds
+	  	H1 
+	  		A href="/boards/#{board.id}"
+	  			= board.name

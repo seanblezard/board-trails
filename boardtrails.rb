@@ -57,7 +57,6 @@ class BoardTrails < Sinatra::Base
 
 
 
-
 	# #######################
 	# Advertised routes
 	# #######################
@@ -71,8 +70,7 @@ class BoardTrails < Sinatra::Base
 
 	# Callback from controller
 	def retrieved_list_of_boards(boards)
-		@boards=boards
-		slim :index, :layout=>true
+		slim :index, :layout=>true, :locals => {boards: boards}
 	end
 
 
