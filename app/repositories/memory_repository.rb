@@ -5,7 +5,10 @@ module MemoryRepository
 	# A simple hash of objects keyed on a unique id
 	@@memory={}
 
+	# #############
 	# Persistence for the Board domain model
+	# #############
+	
 	class BoardRepository
 		def domain_class
 			Board
@@ -43,8 +46,8 @@ module MemoryRepository
 			domain
 		end		
 
-		def find_by_id id
-			@@memory[id]
+		def find_by_id(id)
+			MemoryRepository.object_by_id(id)
 		end
 
 		def all()
@@ -56,13 +59,29 @@ module MemoryRepository
 		end
 	end
 
+	#
+	# Persistence for the Card domain class
+	#
+
 
 	#
-	# Methods available to all memory-based repo variations
+	# Persistence for the CardData domain class
 	#
+
+
+
+
+
+	# ##################
+	# Methods available to all memory-based repo variations
+	# ##################
 
 	def self.issue_new_id
 		UUIDTools::UUID.random_create.to_s 
+	end
+
+	def self.object_by_id id
+		@@memory[id]
 	end
 
 	def self.all_by_class(domain_class)

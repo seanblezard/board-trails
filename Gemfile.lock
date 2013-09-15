@@ -32,10 +32,10 @@ GEM
     mime-types (1.25)
     minitest (4.7.5)
     multi_json (1.8.0)
-    parser (2.0.0.pre7)
+    parser (2.0.0.pre8)
       ast (~> 1.1)
       slop (~> 3.4, >= 3.4.5)
-    powerpack (0.0.7)
+    powerpack (0.0.8)
     pry (0.9.12.2)
       coderay (~> 1.0.5)
       method_source (~> 0.8)
@@ -63,10 +63,10 @@ GEM
     rspec-expectations (2.11.3)
       diff-lcs (~> 1.1.3)
     rspec-mocks (2.11.3)
-    rubocop (0.12.0)
+    rubocop (0.13.0)
       backports (~> 3.3.3)
       parser (~> 2.0.0.pre6)
-      powerpack (~> 0.0.3)
+      powerpack (~> 0.0.6)
       rainbow (>= 1.1.4)
     ruby2ruby (1.2.5)
       ruby_parser (~> 2.0)
@@ -82,6 +82,7 @@ GEM
       temple (~> 0.6.6)
       tilt (>= 1.3.3, < 2.1)
     slop (3.4.6)
+    state_machine (1.2.0)
     temple (0.6.6)
     thread_safe (0.1.3)
       atomic
@@ -106,4 +107,5 @@ DEPENDENCIES
   sinatra (~> 1.4.0)
   sinatra-contrib!
   slim
+  state_machine
   uuidtools (~> 2.1.3)

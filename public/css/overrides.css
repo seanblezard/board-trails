@@ -1,50 +1,48 @@
-/* Set the default font family to Google 'droid sans'*/
-body, P, H1, H2, H3, H4, FORM{
-  font-family: 'Droid Sans', sans-serif;
-  font-weight: 400;
-}
+	/* Set the default font family to Google 'droid sans'*/
+	body, P, H1, H2, H3, H4, FORM{
+	  font-family: 'Droid Sans', sans-serif;
+	  font-weight: 400;
+	}
 
-/* Remove the curved corners on the navbar */
-.navbar{
-	border-radius: 0;
-}
+	/* Remove the curved corners on the navbar */
+	.navbar{
+		border-radius: 0;
+	}
 
-/* Make the navbar title bigger and shinier */
-a.navbar-brand {
-	font-size: 38px;
-	font-weight: 400;
-}
+	/* Make the navbar title bigger and shinier */
+	a.navbar-brand {
+		font-size: 38px;
+		font-weight: 400;
+	}
 
-/* Set the font colour for the navbar brand logo */
-a.navbar-brand{
-	color: #2ecc71;
-}
+	/* Set the font colour for the navbar brand logo */
+	a.navbar-brand{
+		color: #2ecc71;
+	}
 
-/* Set the colour of the span navbar collapsed menu bars */
-span.icon-bar{
-	color:white;
-}
+	/* Set the colour of the span navbar collapsed menu bars */
+	span.icon-bar{
+		color:white;
+	}
 
-/* Make the hamburger responsive icon bigger */
-button.navbar-toggle span.icon-reorder{
-	font-size: 18px;	
-	color: white;
-}
+	/* Make the hamburger responsive icon bigger */
+	button.navbar-toggle span.icon-reorder{
+		font-size: 18px;	
+		color: white;
+	}
 
-/* Add some shadow to jumbotron */
-.jumbotron{
-	box-shadow: 0 0 2px;
-}
+	/* Add some shadow to jumbotron */
+	.jumbotron{
+		box-shadow: 0 0 2px;
+	}
 
-/* Make H1 in Jumbotron a bit less huge */
-.jumbotron H1{
-	font-size: 48px;
-}
-
-
+	/* Make H1 in Jumbotron a bit less huge */
+	.jumbotron H1{
+		font-size: 48px;
+	}
 
 
-
+	
 
 
 
@@ -54,20 +52,22 @@ button.navbar-toggle span.icon-reorder{
 
 
 
-/* Provide a pallette of background colours */
-.palette-nephritis{
-	background-color: #27ae60;
-	color: white;
-}
 
-.palette-green-sea{
-	background-color: #16a085;
-}
+	/* Provide a pallette of background colours */
+	.palette-nephritis{
+		background-color: #27ae60;
+		color: white;
+	}
 
-.palette-clouds{
-	background-color: #ecf0f1;
-}
+	.palette-green-sea{
+		background-color: #16a085;
+	}
 
-.palette-emerald{
-	background-color: #2ecc71;
-}
+	.palette-clouds{
+		background-color: #ecf0f1;
+	}
+
+	.palette-emerald{
+		background-color: #2ecc71;
+	}
+

@@ -60,8 +60,8 @@ class BoardTrails < Sinatra::Base
 	# ######################
 
 	#If we are doing full round-trips use layout, otherwise just return the fragment
-	def use_layout
-		request.env['X-PJAX'] != nil 
+	def use_layout?
+		!request.xhr? && request.env['X-PJAX'].nil? 
 	end
 
 	# #######################
@@ -85,31 +85,35 @@ class BoardTrails < Sinatra::Base
 
 	# Callback from controller
 	def retrieved_list_of_boards(boards)		
-    slim :"boards", :layout => use_layout, :locals => {boards: boards}
+    slim :"boards", :layout => use_layout?, :locals => {boards: boards}
 	end
 
 	#
 	# I want to start tracking this board - create it for me 
 	#
 	post '/boards' do
-		Controller::CreateBoard.new(board_repository).perform(self)
+		Controller::CreateBoard.new(board_repository, params[:name]).perform(self)
 	end
 
 	#Callbacks from controller
 	def board_created_successfully(board)
-		redirect_to '/'
+		slim :"boards/created_successfully", :layout=>use_layout?, :locals => {board: board}
 	end
 
 	def problems_trying_to_create_board(board)
-		slim :index, :layout=>true, :locals => {new_board: board} 
+		slim :"boards/problems_trying_to_create", :layout=>use_layout?, :locals => {board: board}
 	end
 
-
 	#
-	# OK, I've entered all of the details for a new board, create it for me
+	# Show me the detail screen for a board
 	#
+	get '/boards/:id' do
+		Controller::ShowBoard.new(board_repository, params[:id]).perform(self)
+	end
 
-
+	def retrieved_board(board)
+		slim :board, :layout=>use_layout?, :locals=> {board:board, js:"board.js"}
+	end
 
 
 

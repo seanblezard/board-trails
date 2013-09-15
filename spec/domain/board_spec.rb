@@ -43,6 +43,15 @@ describe Board do
 
   end
 
+  describe "retiring lanes from a board" do
+    it "should change the state of the lane from active to retired" do
+      board = Board.new({name: "Project Board"})
+      board.lanes << Board::Lane.new("Silly List")
+      board.retire_lane("Silly List")
+
+      board.lanes[0].retired?.should eq true
+    end
+  end
      
   after(:each) do
   end

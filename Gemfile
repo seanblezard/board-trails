@@ -7,6 +7,7 @@ gem 'rabl'
 gem 'slim'
 gem 'chronic'
 gem "uuidtools", "~> 2.1.3"
+gem "state_machine"
 
 group :development, :test do
   gem "pry"
