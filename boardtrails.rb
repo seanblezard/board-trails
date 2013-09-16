@@ -119,7 +119,7 @@ class BoardTrails < Sinatra::Base
 	# Add a new lane to an existing board 
 	#
 	post '/boards/:id/lanes' do
-		Controller::AddLaneToBoard.new(board_repository, params[:name]).perform(self)
+		Controller::AddLaneToBoard.new(board_repository, params[:id], params[:name]).perform(self)
 	end
 
 	def lane_added_successfully(board)

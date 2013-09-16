@@ -19,9 +19,8 @@
 								.col-md-8.col-md-offset-2
 									#laneCreationStatus data-id="#{board.id}"
 
-
-						- board.lanes.each do |lane|
-							P = lane.name						
+						#lanes
+							== slim :lanes, layout: false	, :locals=>{board: board}			
 
 						
 					.col-md-6

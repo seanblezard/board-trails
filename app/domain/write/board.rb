@@ -51,6 +51,10 @@ class Board
 	    @lanes=[]
 	  end
 
+	  def remove_blank_lanes
+	  	@lanes.each {|lane| @lanes.delete(lane) if lane.name.nil? || lane.name.length==0}
+	  end
+
 	  def << lane
 	  	lane.id ||= Time.now.to_i #It only needs to be unique to this board
 	  	@lanes << lane
@@ -98,7 +102,8 @@ class Board
 	  		lanes_with_no_name_count += 1 if lane_name.nil? || lane_name.size==0	  		
 	  	end
 		  if lanes_with_no_name_count>0
-				message = "You have #{lanes_with_no_name_count} lanes without a title. Fix this please."
+				message = "You can't have board lanes without a name."
+				board.lanes.remove_blank_lanes
 		  	board.violations << DomainModel::DomainViolation.new(message)
 		  end
 		end

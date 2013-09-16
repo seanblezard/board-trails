@@ -48,6 +48,14 @@ describe Board do
       board.violations.size.should eq 1
     end
 
+    it "should not add a blank lane if I try to add one without a name" do 
+      board = Board.new({name: "Project Board"})
+      board.lanes << Board::Lane.new()
+
+      board.validate
+      board.lanes.size.should eq 0
+    end    
+
   end
 
   describe "retiring lanes from a board" do

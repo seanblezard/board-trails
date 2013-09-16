@@ -1,1 +1,8 @@
-Lanes
+- if board.violations.length > 0
+  .alert.alert-danger
+		Strong There was a problem
+		- for violation in board.violations do
+			BR = violation.message
+
+- board.lanes.each do |lane|
+		P = lane.name						

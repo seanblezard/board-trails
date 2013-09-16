@@ -9,8 +9,8 @@ boardController.prototype = {
 			  $(targetDiv).html(data);
 			});
     },
-    addLane: function(targetDiv, boardId, lane) {			
-    	alert(boardId);
+
+    addLane: function(targetDiv, nameField, boardId, lane) {			
 			$.ajax({
 		  	url: "/boards/" + boardId + '/lanes',
 		  	type: "POST",
@@ -18,6 +18,7 @@ boardController.prototype = {
 		  	data: {name: lane}
 			}).success(function(data) {
 			  $(targetDiv).html(data);
+			  $(nameField).val("");
 			});
     }
 };
@@ -30,7 +31,7 @@ $(document).ready(function() {
 	})
 
 	$("#addLaneSubmit").click(function(){
-		controller.addLane("#laneCreationStatus", $("#laneCreationStatus").data("id"), $("#laneName").val());
+		controller.addLane("#lanes", "#laneName", $("#laneCreationStatus").data("id"), $("#laneName").val());
 	})
 
 });
