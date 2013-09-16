@@ -1,4 +1,5 @@
 require 'state_machine' 
+require 'forwardable'
 
 #
 # A model representation of a physical whiteboard (aggregate root)
@@ -12,11 +13,11 @@ class Board
 	include DomainModel
 
 	attr_accessor :name 	#String
-	attr_accessor :lanes  #Array of Board::Lane objects
+	attr_accessor :lanes  #Array of Board::Lane objects contained inside special LaneCollection object
 
 	def initialize(attributes={})
 		super(attributes)
-		@lanes = [] 
+		@lanes = LaneCollection.new 
 	end	
 
 	def validate
@@ -37,13 +38,34 @@ class Board
 	end
 
 	#
+	# A special collection (array) for holding and managing lanes
+	#
+	#
+
+	class LaneCollection
+  	extend Forwardable
+  
+	  def_delegators :@lanes, :[], :size, :map, :delete, :each, :reverse, :reverse!
+	
+	  def initialize
+	    @lanes=[]
+	  end
+
+	  def << lane
+	  	lane.id ||= Time.now.to_i #It only needs to be unique to this board
+	  	@lanes << lane
+	  end
+	end
+
+
+	#
 	# A model representing a particular lane or section of a physical whiteboard. 
 	# Identified by being uniquely named
  	#
 
-	class Lane < Struct.new(:name, :state)		
-		def initialize (name=nil, state='active')
-			super(name, state)
+	class Lane < Struct.new(:name, :state, :id)		
+		def initialize (name=nil, state='active', id=nil)
+			super(name, state, id)
 		end
 
 		state_machine :state, :initial=>:active do
@@ -76,20 +98,10 @@ class Board
 	  		lanes_with_no_name_count += 1 if lane_name.nil? || lane_name.size==0	  		
 	  	end
 		  if lanes_with_no_name_count>0
-				message = "You have #{lanes_with_no_name_count} lanes without a title. Fix this."
+				message = "You have #{lanes_with_no_name_count} lanes without a title. Fix this please."
 		  	board.violations << DomainModel::DomainViolation.new(message)
 		  end
 		end
 	end
-
-	#
-	# Snapshot for exporting a reference
-	#
-	def snapshot
-		Snapshot.new(@id, @name)
-	end
-
-	class Snapshot < Struct.new(:board_id, :board_name)
-	end	
 
 end

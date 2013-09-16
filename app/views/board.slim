@@ -8,7 +8,21 @@
 			  .row
 					.col-md-6
 						H3 Lanes
-						
+						form.form-horizontal role="form" action="/boards/#{board.id}/lanes" method="post"
+							.form-group
+								.col-md-6
+									input.form-control type="text" id="laneName" placeholder="Add a new lane called..."
+								.col-md2
+									button.btn.btn-success#addLaneSubmit type="submit" Add Lane
+						.container
+							.row
+								.col-md-8.col-md-offset-2
+									#laneCreationStatus data-id="#{board.id}"
+
+
+						- board.lanes.each do |lane|
+							P = lane.name						
+
 						
 					.col-md-6
 						H3 Cards	

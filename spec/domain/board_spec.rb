@@ -33,6 +33,13 @@ describe Board do
       board.lanes.size.should eq 1
     end
 
+    it "should assign an id to the board on adding the lane successfully" do 
+      board = Board.new({name: "Project Board"})
+      board.lanes << Board::Lane.new("Backlog")
+
+      board.lanes[0].id.should_not eq nil
+    end
+
     it "should create a board violation when I add a lane with no name" do 
       board = Board.new({name: "Project Board"})
       board.lanes << Board::Lane.new()
