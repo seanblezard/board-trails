@@ -115,13 +115,26 @@ class BoardTrails < Sinatra::Base
 		slim :board, :layout=>use_layout?, :locals=> {board:board, js:"board.js"}
 	end
 
+	#
+	# Add a new lane to an existing board 
+	#
+	post '/boards/:id/lanes' do
+		Controller::AddLaneToBoard.new(board_repository, params[:name]).perform(self)
+	end
+
+	def lane_added_successfully(board)
+		slim :lanes, :layout=>use_layout?, :locals=>{board: board}
+	end
+
+	def problems_trying_to_add_lane(board)
+		slim :lanes, :layout=>use_layout?, :locals=>{board: board}
+	end
 
 
 	# Take me to the edit screen for an existing board
 
 	# Update the details of an existing board
 
-	# Add a new lane to an existing board 
 
 	# Re-sort the order of the lanes on an existing board
 

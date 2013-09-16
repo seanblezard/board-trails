@@ -1,9 +1,6 @@
 # encoding: UTF-8
 ENV['RACK_ENV'] ||= 'test'
 
-# NOTE If setting RACK_ENV to integrated then remember to create a
-# couch DB database instance called trails_test to use
-
 require 'bundler'
 Bundler.require
 
@@ -23,3 +20,7 @@ end
 def app
   BoardTrails
 end
+
+def xhr(verb, path, params = {})
+  send(verb,path, params, "HTTP_X_REQUESTED_WITH" => "XMLHttpRequest")
+end 
