@@ -45,6 +45,7 @@ class BoardTrails < Sinatra::Base
 	
 	configure :test, :development do
 		Repository.register(:board, MemoryRepository::BoardRepository.new)
+		Repository.register(:card, MemoryRepository::CardRepository.new)
 	end
 
 	# #######################

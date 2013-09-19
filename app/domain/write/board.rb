@@ -37,6 +37,13 @@ class Board
 		nil
 	end
 
+	def move_card_to(card,lane)
+		LaneMustExist.new(self, lane)
+		return nil unless card.valid?
+		card.location = Card::Location.new(self.id, lane.id)
+		card
+	end
+
 	#
 	# A special collection (array) for holding and managing lanes
 	#
@@ -58,6 +65,11 @@ class Board
 	  def << lane
 	  	lane.id ||= Time.now.to_i #It only needs to be unique to this board
 	  	@lanes << lane
+	  end
+
+	  def find_by_id(lane_id)
+	  	@lanes.each {|lane| return lane if lane.id == lane_id}
+	  	nil
 	  end
 	end
 
@@ -111,4 +123,10 @@ class Board
 		end
 	end
 
+	class LaneMustExist
+		def initialize(board, lane)
+			message = "Unknown lane!!"
+			board.violations << DomainModel::DomainViolation.new(message) if lane.nil?
+		end
+	end
 end

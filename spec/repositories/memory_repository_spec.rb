@@ -51,6 +51,23 @@ describe MemoryRepository do
     end
   end
      
+  describe "CardRepository" do
+    it "should create a new unsaved Card domain" do
+      card_title = "Card title"
+      card = MemoryRepository::CardRepository.new.new_card({title: card_title})
+      card.class.should eq Card
+    end    
+
+    it "should persist the new card" do
+      card_title = "Card title"
+      repo = MemoryRepository::CardRepository.new
+      card = repo.new_card({title: card_title})
+      card = repo.create(card)
+      card.valid?.should eq true
+      card.id.should_not eq nil
+    end    
+  end
+  
   after(:each) do
     MemoryRepository.clear_memory
   end

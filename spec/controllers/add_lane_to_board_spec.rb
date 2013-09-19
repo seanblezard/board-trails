@@ -27,3 +27,4 @@ class AddLaneToBoardSpecReporter < Struct.new(:board)
   end
 end
 
+  

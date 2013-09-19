@@ -16,6 +16,10 @@ class Card
 		RequiresTitle.new(self)
 	end
 
+	def piled_next_to_board?
+		self.location.lane_id == nil
+	end
+
 	class RequiresTitle
 		def initialize(card)
 			message = "You have to supply a title for this card"

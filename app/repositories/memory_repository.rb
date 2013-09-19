@@ -15,35 +15,15 @@ module MemoryRepository
 		end
 
 		def new_board(attributes={})
-			domain = domain_class.new(attributes)			
-			domain
+			domain_class.new(attributes)						
 		end
-
+		
 		def create(domain)
-			MemoryRepository.memory ||= {}
-			
-			domain.validate
-			
-			if domain.valid?
-				domain.created_at = Time.now.utc
-				domain.id=MemoryRepository.issue_new_id
-				MemoryRepository.memory[domain.id] = domain
-			end
-
-			domain
+			MemoryRepository.create(domain)
 		end
 
 		def update(domain)
-			MemoryRepository.memory ||= {}
-			
-			domain.validate			
-			
-			if domain.valid?
-				domain.updated_at = Time.now.utc
-				MemoryRepository.memory[domain.id] = domain
-			end
-			
-			domain
+			MemoryRepository.update(domain)
 		end		
 
 		def find_by_id(id)
@@ -62,6 +42,36 @@ module MemoryRepository
 	#
 	# Persistence for the Card domain class
 	#
+
+	class CardRepository
+		def domain_class
+			Card
+		end
+
+		def new_card(attributes={})
+			domain_class.new(attributes)			
+		end
+
+		def create(domain)
+			MemoryRepository.create(domain)
+		end
+
+		def update(domain)
+			MemoryRepository.update(domain)
+		end		
+
+		def find_by_id(id)
+			MemoryRepository.object_by_id(id)
+		end
+
+		def all()
+			MemoryRepository.all_by_class(self.domain_class)
+		end
+
+		def delete_all()
+			MemoryRepository.clear_memory_by_class(self.domain_class)
+		end
+	end
 
 
 	#
@@ -107,5 +117,32 @@ module MemoryRepository
 
 	def self.clear_memory
 		@@memory={}
+	end
+
+	def self.create(domain)
+		MemoryRepository.memory ||= {}
+		
+		domain.validate
+		
+		if domain.valid?
+			domain.created_at = Time.now.utc
+			domain.id=MemoryRepository.issue_new_id
+			MemoryRepository.memory[domain.id] = domain
+		end
+
+		domain
+	end
+
+	def self.update(domain)
+		MemoryRepository.memory ||= {}
+		
+		domain.validate			
+		
+		if domain.valid?
+			domain.updated_at = Time.now.utc
+			MemoryRepository.memory[domain.id] = domain
+		end
+		
+		domain
 	end
 end
