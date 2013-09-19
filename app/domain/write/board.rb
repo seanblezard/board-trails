@@ -87,6 +87,7 @@ class Board
 	class RequiresName
 		def initialize(board)
 			message = "You have to supply a name for this new board"
+   		
    		name = board.name
 		  if name.nil? || name.length == 0
 		  	board.violations << DomainModel::DomainViolation.new(message)
@@ -96,13 +97,14 @@ class Board
 
 	class LanesMustBeNamed
 		def initialize(board)
+			message = "You can't have board lanes without a name."
+
 	  	lanes_with_no_name_count = 0
 	  	board.lanes.each do |lane|
 	  		lane_name = lane.name
 	  		lanes_with_no_name_count += 1 if lane_name.nil? || lane_name.size==0	  		
 	  	end
-		  if lanes_with_no_name_count>0
-				message = "You can't have board lanes without a name."
+		  if lanes_with_no_name_count>0				
 				board.lanes.remove_blank_lanes
 		  	board.violations << DomainModel::DomainViolation.new(message)
 		  end
