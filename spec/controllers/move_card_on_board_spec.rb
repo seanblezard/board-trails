@@ -27,14 +27,14 @@ describe "Add a new card to an existing board" do
 		reporter.card.location.lane_id.should eq @board.lanes[1].id
   end     
 
-  # it "card location should stay the same if I try to move to an unknown lane" do
-  #   controller = Controller::MoveCardOnBoard.new(@board_repo, @card_repo, @card.id, "RUBBISH LANE ID")   
-  #   reporter   = MoveCardOnBoardSpecReporter.new
+  it "card location should stay the same if I try to move to an unknown lane" do
+    controller = Controller::MoveCardOnBoard.new(@board_repo, @card_repo, @card.id, "RUBBISH LANE ID")   
+    reporter   = MoveCardOnBoardSpecReporter.new
      
-  #   controller.perform(reporter)   
-  #   reporter.card.location.lane_id.should eq @board.lanes[0].id
-  #   reporter.ok.should == false
-  # end     
+    controller.perform(reporter)   
+    reporter.card.location.lane_id.should eq @board.lanes[0].id
+    reporter.ok.should == false
+  end     
 
 
   after(:all) do
@@ -50,7 +50,7 @@ class MoveCardOnBoardSpecReporter < Struct.new(:card, :ok)
     self.card = card
   end
 
-  def problems_moving_card(card)
+  def problems_trying_to_move_card(card)
     self.ok = false
     self.card = card
   end

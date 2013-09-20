@@ -37,13 +37,6 @@ class Board
 		nil
 	end
 
-	def move_card_to(card,lane)
-		LaneMustExist.new(self, lane)
-		return nil unless card.valid?
-		card.location = Card::Location.new(self.id, lane.id)
-		card
-	end
-
 	#
 	# A special collection (array) for holding and managing lanes
 	#

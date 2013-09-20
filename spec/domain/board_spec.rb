@@ -68,22 +68,6 @@ describe Board do
     end
   end
 
-  describe "moving a card to a different lane on the board" do
-    it "should change the lane of the card from the backlog lane to the doing lane" do
-      board = Board.new({name: "Project Board"})
-      board.lanes << Board::Lane.new("Backlog")
-      board.lanes << Board::Lane.new("Doing")
-      backlog = board.lanes[0]
-      doing   = board.lanes[1]
-
-      card = Card.new({title: "Do it", location: Card::Location.new({board_id: board.id, lane_id: backlog.id}) })
-
-      board.move_card_to(card, doing)
-
-      card.location.lane_id.should eq doing.id
-    end
-  end
-     
   after(:each) do
   end
 
